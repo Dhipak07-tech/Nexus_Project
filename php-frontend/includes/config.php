@@ -14,10 +14,10 @@ define('FIREBASE_AUTH_DOMAIN', 'studio-1364433017-7dd51.firebaseapp.com');
 
 // Service account for Firestore REST API
 $serviceAccountPath = __DIR__ . '/../../service-account.json';
-$serviceAccount = file_exists($serviceAccountPath) ? json_decode(file_get_contents($serviceAccountPath), true) : null;
+$serviceAccount = file_exists($serviceAccountPath) ? json_decode(file_get_contents($serviceAccountPath), true) : [];
 
 // Application URLs
-define('BASE_URL', '/php-frontend');
+define('BASE_URL', '');
 define('API_BASE', 'https://firestore.googleapis.com/v1/projects/' . FIREBASE_PROJECT_ID . '/databases/' . FIREBASE_DATABASE_ID);
 
 // Helper: Check if user is logged in
@@ -57,7 +57,7 @@ function redirect(string $path): void {
 function requireLogin(): void {
     if (!isLoggedIn()) {
         $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-        redirect('/login');
+        redirect('/?page=login');
     }
 }
 

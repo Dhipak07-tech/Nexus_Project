@@ -117,6 +117,17 @@ function renderLayout(string $title, callable $contentCallback, ?array $extraDat
                             ['icon' => 'database', 'label' => 'CMDB Assets', 'page' => 'cmdb'],
                         ]
                     ],
+                    [
+                        'label' => 'Companies',
+                        'items' => [
+                            ['icon' => 'building-2', 'label' => 'All Companies', 'page' => 'companies'],
+                            ['icon' => 'users', 'label' => 'Contacts', 'page' => 'companies', 'params' => 'tab=contacts'],
+                            ['icon' => 'settings', 'label' => 'Configuration', 'page' => 'companies', 'params' => 'tab=configuration'],
+                            ['icon' => 'activity', 'label' => 'Company Activity', 'page' => 'companies', 'params' => 'tab=activity'],
+                            ['icon' => 'alert-triangle', 'label' => 'Exceptions', 'page' => 'companies', 'params' => 'tab=exceptions'],
+                            ['icon' => 'bar-chart-2', 'label' => 'Company Reports', 'page' => 'companies', 'params' => 'tab=reports'],
+                        ]
+                    ],
                 ];
 
                 if ($isAdmin) {

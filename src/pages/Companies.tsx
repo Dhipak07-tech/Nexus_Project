@@ -111,8 +111,8 @@ export function Companies() {
   const [showIstOptions, setShowIstOptions] = useState(false);
   const [showOnlyISTClients, setShowOnlyISTClients] = useState(false);
   const istPanelRef = useRef<HTMLDivElement>(null);
-  const [activeDetailTab, setActiveDetailTab] = useState("overview");
-  const [showAddCompanyModal, setShowAddCompanyModal] = useState(false);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [activeSection, setActiveSection] = useState("companies");
   
   // Add Company Form State
   const [newCompany, setNewCompany] = useState({
@@ -879,6 +879,70 @@ export function Companies() {
         </div>
       </div>
 
+      {/* Navigation Tabs */}
+      <div className="flex space-x-1 mb-6">
+        <button
+          onClick={() => setActiveSection("companies")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "companies" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Companies
+        </button>
+        <button
+          onClick={() => setActiveSection("contacts")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "contacts" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Contacts
+        </button>
+        <button
+          onClick={() => setActiveSection("configuration")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "configuration" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Configuration
+        </button>
+        <button
+          onClick={() => setActiveSection("company-activity")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "company-activity" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Company Activity
+        </button>
+        <button
+          onClick={() => setActiveSection("company-reports")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "company-reports" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Company Reports
+        </button>
+        <button
+          onClick={() => setActiveSection("exceptions")}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            activeSection === "exceptions" 
+              ? "bg-blue-600 text-white" 
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          }`}
+        >
+          Exceptions
+        </button>
+      </div>
+
       {/* IST Filter Banner */}
       {showOnlyISTClients && (
         <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
@@ -1113,19 +1177,23 @@ export function Companies() {
                   { id: "ist", label: "IST Details", disabled: !selectedCompany.isISTClient },
                   { id: "contacts", label: "Contacts" },
                   { id: "activity", label: "Activity" },
-                  { id: "documents", label: "Documents" }
+                  { id: "documents", label: "Documents" },
+                  { id: "configuration", label: "Configuration" },
+                  { id: "company-activity", label: "Company Activity" },
+                  { id: "company-reports", label: "Company Reports" },
+                  { id: "exceptions", label: "Exceptions" }
                 ].map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => !tab.disabled && setActiveDetailTab(tab.id)}
+                    onClick={() => !tab.disabled && setActiveSection(tab.id)}
                     disabled={tab.disabled}
                     className={cn(
                       "py-4 px-1 border-b-2 font-medium text-sm transition-colors",
-                      activeDetailTab === tab.id
+                      activeSection === tab.id
                         ? "border-blue-600 text-blue-600"
                         : tab.disabled
-                        ? "border-transparent text-gray-400 cursor-not-allowed"
-                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                        : "border-gray-300 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                     )}
                   >
                     {tab.label}
@@ -1136,7 +1204,7 @@ export function Companies() {
 
             {/* Tab Content */}
             <div className="flex-1 overflow-y-auto p-6">
-              {activeDetailTab === "overview" && (
+              {activeSection === "companies" && (
                 <div className="space-y-6">
                   {/* Company Summary Header */}
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg p-6 text-white">

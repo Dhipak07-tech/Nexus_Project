@@ -13,7 +13,7 @@ class FirebaseAPI {
     public function __construct() {
         global $serviceAccount;
         if (!$serviceAccount) {
-            throw new Exception('Service account not configured');
+            // throw new Exception('Service account not configured');
         }
         $this->serviceAccount = $serviceAccount;
     }

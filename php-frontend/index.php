@@ -19,7 +19,7 @@ $publicPages = ['login', 'register', 'logout'];
 // Check authentication
 if (!in_array($page, $publicPages) && !isLoggedIn()) {
     $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-    redirect('/login');
+    redirect('/?page=login');
 }
 
 // Initialize auth and API
@@ -95,7 +95,7 @@ try {
         case 'logout':
             $auth->logout();
             setFlash('success', 'You have been logged out.');
-            redirect('/login');
+            redirect('/?page=login');
             break;
 
         case 'dashboard':
@@ -427,6 +427,16 @@ try {
             renderLayout('CMDB Assets', function($data) {
                 include __DIR__ . '/pages/cmdb.php';
             });
+            break;
+
+        case 'companies':
+            renderLayout('Companies', function($data) {
+                include __DIR__ . '/pages/companies.php';
+            });
+            break;
+
+        case 'companies_ajax':
+            include __DIR__ . '/pages/companies_ajax.php';
             break;
 
         case 'approvals':
