@@ -29,7 +29,6 @@ const Login = lazy(() => import("./pages/Login").then(m => ({ default: m.Login }
 const Register = lazy(() => import("./pages/Register").then(m => ({ default: m.Register })));
 const Timesheet = lazy(() => import("./pages/Timesheet").then(m => ({ default: m.Timesheet })));
 const TimesheetReports = lazy(() => import("./pages/TimesheetReports").then(m => ({ default: m.TimesheetReports })));
-const Companies = lazy(() => import("./pages/Companies").then(m => ({ default: m.Companies })));
 
 function LoadingScreen() {
   return (
@@ -230,14 +229,6 @@ function AppBody() {
               element={
                 <ProtectedRoute>
                   <TimesheetReports />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/companies" 
-              element={
-                <ProtectedRoute>
-                  <Companies />
                 </ProtectedRoute>
               } 
             />

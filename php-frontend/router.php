@@ -6,6 +6,11 @@
 
 // If file exists, serve it directly
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Strip proxy prefix if accessed via Node server proxy
+if (strpos($uri, '/php-frontend') === 0) {
+    $uri = substr($uri, strlen('/php-frontend'));
+    if ($uri === '') $uri = '/';
+}
 $path = __DIR__ . $uri;
 
 if (file_exists($path) && is_file($path)) {

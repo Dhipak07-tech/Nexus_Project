@@ -8,6 +8,7 @@ import { getFirestore } from "firebase-admin/firestore";
 import { GoogleGenAI } from "@google/genai";
 import { config as loadEnv } from "dotenv";
 import firebaseConfig from "./firebase-applet-config.json" with { type: "json" };
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 // Load environment variables from .env file
 loadEnv();
@@ -556,6 +557,17 @@ Respond in a conversational, friendly tone.`,
     }
   });
 
+  // PHP Reverse Proxies
+  app.use('/php-backend', createProxyMiddleware({ 
+    target: 'http://localhost:8000', 
+    changeOrigin: true,
+    pathRewrite: { '^/php-backend': '' } 
+  }));
+  
+  app.use('/php-frontend', createProxyMiddleware({ 
+    target: 'http://localhost:8001', 
+    changeOrigin: true 
+  }));
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {

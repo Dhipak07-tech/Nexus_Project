@@ -17,7 +17,7 @@ $serviceAccountPath = __DIR__ . '/../../service-account.json';
 $serviceAccount = file_exists($serviceAccountPath) ? json_decode(file_get_contents($serviceAccountPath), true) : [];
 
 // Application URLs
-define('BASE_URL', '');
+define('BASE_URL', '/php-frontend');
 define('API_BASE', 'https://firestore.googleapis.com/v1/projects/' . FIREBASE_PROJECT_ID . '/databases/' . FIREBASE_DATABASE_ID);
 
 // Helper: Check if user is logged in
